@@ -1,4 +1,4 @@
-.body {
+body {
   font-family: Arial, sans-serif;
 }
 
@@ -47,4 +47,73 @@
 
 .hide {
   display: none;
+}
+
+/* Custom Styling for Components */
+.component label {
+  margin-right: 5px;
+}
+
+.component select,
+.component input[type="text"],
+.component input[type="number"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.component button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.when-block {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.when-block h4 {
+  margin: 5px 0;
+}
+
+.when-block .remove-when-btn {
+  margin-bottom: 5px;
+}
+
+/* Custom Styling for WHEN Options */
+.component.app-state-options,
+.component.whatfix-callbacks-options {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+
+.mutation-options,
+.repeats-for-options {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mutation-options label,
+.repeats-for-options label {
+  margin-bottom: 5px;
+}
+
+/* Additional Custom Styling for Custom Event */
+.component.custom-event-options {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
 }
