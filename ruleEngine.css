@@ -1,4 +1,4 @@
-body {
+.body {
   font-family: Arial, sans-serif;
 }
 
@@ -9,7 +9,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+.h2 {
   text-align: center;
   margin-bottom: 20px;
 }
