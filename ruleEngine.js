@@ -139,7 +139,10 @@ function removeProcessorBlock(removeBtn) {
   }
 }
 
-
+function removeSequenceBlock(removeBtn) {
+  const sequenceBlock = removeBtn.closest('.sequence');
+  sequenceBlock.remove();
+}
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -215,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   <option value="function-invocation">Function Invocation</option>
                 </select>
               </div>
-              <button class="remove-sequence-btn">Remove Sequence</button>
+              <button class="remove-sequence-btn" onclick="removeSequenceBlock(this)">Remove Sequence</button>
   `;
 
   sequencesContainer.insertBefore(newSequenceBlock, addSequenceBtn);
