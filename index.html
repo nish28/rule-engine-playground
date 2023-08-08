@@ -1,102 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rule Engine</title>
-  <link rel="stylesheet" href="ruleEngine.css">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule Engine</title>
+    <link rel="stylesheet" href="ruleEngine.css">
+  </head>
 
-<body>
-  <div class="container">
-    <h2>Rule Engine</h2>
-    <ul class="tabs">
-      <li class="active" data-tab="where-tab">WHERE</li>
-      <li data-tab="when-tab">WHEN</li>
-      <li data-tab="what-tab">WHAT</li>
-    </ul>
-    <div class="tab-content">
-      <div id="where-tab" class="tab-pane active">
-        <h3>WHERE</h3>
-        <div class="component">
-          <label for="where-type">Type:</label>
-          <select id="where-type">
-            <option value="">Select Where</option>
-            <option value="url">url</option>
-            <option value="path">path</option>
-            <option value="query">query</option>
-            <option value="page_tag">page tag</option>
-            <option value="role_tag">role tag</option>
-            <option value="user_attr">user_attr</option>
-            <option value="ent_attr">ent_attr</option>
-          </select>
+  <body>
+    <div class="container">
+      <h2>Rule Engine</h2>
+      <ul class="tabs">
+        <li class="active" data-tab="where-tab">WHERE</li>
+        <li data-tab="when-tab">WHEN</li>
+        <li data-tab="what-tab">WHAT</li>
+      </ul>
+      <div class="tab-content">
+        <div id="where-tab" class="tab-pane active">
+          <h3>WHERE</h3>
+          <div class="component where-components">
+            <label for="where-type">Type:</label>
+            <select id="where-type">
+              <option value="">Select Where</option>
+              <option value="url">url</option>
+              <option value="path">path</option>
+              <option value="query">query</option>
+              <option value="page_tag">page tag</option>
+              <option value="role_tag">role tag</option>
+              <option value="user_attr">user_attr</option>
+              <option value="ent_attr">ent_attr</option>
+            </select>
+
+            <label for="where-operation">Operation:</label>
+            <select id="where-operation">
+              <option value="=">=</option>
+              <option value="!=">!=</option>
+              <option value="startsWith">startsWith</option>
+              <option value="endsWith">endsWith</option>
+              <option value="contains">contains</option>
+              <option value="greaterThan">greater than</option>
+            </select>
+
+            <label for="where-value">Value:</label>
+            <input type="text" id="where-value" placeholder="Enter value">
+          </div>
+          <div class="component">
+            <select id="and-or">
+              <option value="and">AND</option>
+              <option value="or">OR</option>
+            </select>
+            <button id="add-where-btn">+</button>
+          </div>
+          <div id="where-container"></div>
         </div>
-        <div class="component">
-          <label for="where-operation">Operation:</label>
-          <select id="where-operation">
-            <option value="=">=</option>
-            <option value="!=">!=</option>
-            <option value="startsWith">startsWith</option>
-            <option value="endsWith">endsWith</option>
-            <option value="contains">contains</option>
-            <option value="greaterThan">greater than</option>
-            <!-- Add more options as needed -->
-          </select>
+
+        <div id="when-tab" class="tab-pane">
+          <h3>WHEN</h3>
+          <button id="add-when-btn">Add WHEN</button>
+          <div id="when-container"></div>
         </div>
-        <div class="component">
-          <label for="where-value">Value:</label>
-          <input type="text" id="where-value" placeholder="Enter value">
+        <div id="what-tab" class="tab-pane">
+          <h3>WHAT</h3>
+          <div class="component">
+            <label for="fetcher">Fetcher:</label>
+            <select id="fetcher">
+              <option value="">Select Fetcher</option>
+              <option value="element">Elements</option>
+              <option value="network-call">Network Call</option>
+              <option value="variable">Variable</option>
+              <option value="local-storage">Local Storage</option>
+              <option value="session-storage">Session Storage</option>
+              <option value="function-invocation">Function Invocation to read value</option>
+              <option value="read-from-persist">Read from persist</option>
+            </select>
+          </div>
+          <div class="component">
+            <label for="processor">Processor:</label>
+            <select id="processor">
+              <option value="">Select Processor</option>
+              <option value="read-attribute">Read Attribute</option>
+              <option value="string-operation">String Operation</option>
+              <option value="json-operation">JSON Operation</option>
+              <option value="number-operation">Number Operation</option>
+            </select>
+          </div>
+          <div class="component">
+            <label for="action">Action:</label>
+            <select id="action">
+              <option value="">Select Action</option>
+              <option value="scroll-into-view">Scroll Into View</option>
+              <option value="event-propagation">Event Propagation</option>
+              <option value="_wfx_function-invocation">_wfx_function invocation</option>
+              <option value="_wfx_setting_customizer">_wfx_setting_customizer</option>
+              <option value="persist">Persist</option>
+              <option value="fire-custom-event">Fire Custom Event</option>
+              <option value="function-invocation">Function Invocation</option>
+            </select>
+          </div>
         </div>
       </div>
-      <div id="when-tab" class="tab-pane">
-        <h3>WHEN</h3>
-        <button id="add-when-btn">Add WHEN</button>
-        <div id="when-container"></div>
-      </div>
-      <div id="what-tab" class="tab-pane">
-  <h3>WHAT</h3>
-  <div class="component">
-    <label for="fetcher">Fetcher:</label>
-    <select id="fetcher">
-      <option value="">Select Fetcher</option>
-      <option value="element">Elements</option>
-      <option value="network-call">Network Call</option>
-      <option value="variable">Variable</option>
-      <option value="local-storage">Local Storage</option>
-      <option value="session-storage">Session Storage</option>
-      <option value="function-invocation">Function Invocation to read value</option>
-      <option value="read-from-persist">Read from persist</option>
-    </select>
-  </div>
-  <div class="component">
-    <label for="processor">Processor:</label>
-    <select id="processor">
-      <option value="">Select Processor</option>
-      <option value="read-attribute">Read Attribute</option>
-      <option value="string-operation">String Operation</option>
-      <option value="json-operation">JSON Operation</option>
-      <option value="number-operation">Number Operation</option>
-    </select>
-  </div>
-  <div class="component">
-    <label for="action">Action:</label>
-    <select id="action">
-      <option value="">Select Action</option>
-      <option value="scroll-into-view">Scroll Into View</option>
-      <option value="event-propagation">Event Propagation</option>
-      <option value="_wfx_function-invocation">_wfx_function invocation</option>
-      <option value="_wfx_setting_customizer">_wfx_setting_customizer</option>
-      <option value="persist">Persist</option>
-      <option value="fire-custom-event">Fire Custom Event</option>
-      <option value="function-invocation">Function Invocation</option>
-    </select>
-  </div>
-</div>
-
     </div>
-  </div>
-  <script src="ruleEngine.js"></script>
-</body>
+    <script src="ruleEngine.js"></script>
+  </body>
 
 </html>
