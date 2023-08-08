@@ -141,7 +141,8 @@ h2 {
 }
 
 .component.where-components label {
-  margin-right: 10px; /* Added margin between label and select/input */
+  margin-right: 10px;
+  /* Added margin between label and select/input */
   flex: 0 0 auto;
 }
 
@@ -152,7 +153,8 @@ h2 {
   border-radius: 4px;
   flex: 1 1 auto;
   min-width: 0;
-  margin-right: 10px; /* Added margin between select/input elements */
+  margin-right: 10px;
+  /* Added margin between select/input elements */
 }
 
 .component #and-or {
@@ -201,4 +203,70 @@ h2 {
 
 .and-or-options label {
   margin-right: 5px;
+}
+
+.sequence {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.sequence::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  width: 20px;
+  height: 2px;
+  background-color: #ccc;
+  transform: translateY(-50%);
+}
+
+.sequence:first-child::before {
+  display: none;
+}
+
+/* Styling for Components in a Sequence */
+.sequence .component {
+  margin-right: 10px;
+}
+
+.processor-block {
+  flex: 1;
+}
+
+.fetcher-component,
+.action-component {
+  flex: 0.7;
+}
+
+.processor-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.add-processor-btn,
+.remove-processor-btn {
+  padding: 4px 8px !important;
+  background-color: #dc3545 !important;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.add-processor-btn {
+  background-color: #28a745 !important;
+}
+
+.processor-label-addition {
+  display: flex;
+    justify-content: end;
+    align-items: center;
 }
