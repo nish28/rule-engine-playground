@@ -35,7 +35,7 @@ function handleEventTypeChange(whenIndex) {
     customEventOptions.classList.remove("hide");
     eventData1.classList.remove("hide");
     eventData2.classList.remove("hide");
-    ; // Show/hide event data options based on selected filter
+    // Show/hide event data options based on selected filter
   } else {
     appStateOptions.classList.add("hide");
     whatfixCallbacksOptions.classList.add("hide");
@@ -58,17 +58,81 @@ function handleEventTypeChange(whenIndex) {
   }
 }
 
+function handleAndOrChange(whenIndex) {
+  const andOrSelect = document.getElementById(`and-or-${whenIndex}`);
+  const andOrValue = andOrSelect.value;
+  console.log(`AND/OR for WHEN ${whenIndex}:`, andOrValue);
+}
+
 function removeWhen(whenIndex) {
-    const whenBlock = document.querySelector(`[data-when-index="${whenIndex}"]`);
-    whenBlock.remove();
-  }
-document.addEventListener("DOMContentLoaded", function () {
+  const whenBlock = document.querySelector(`[data-when-index="${whenIndex}"]`);
+  whenBlock.remove();
+}
+
+function addWhereBlock() {
+  const whereContainer = document.getElementById("where-container");
+
+  const newWhereBlock = document.createElement("div");
+  newWhereBlock.classList.add("where-block");
+
+  const whereIndex = whereContainer.children.length + 1;
+  console.log(whereIndex);
+  newWhereBlock.innerHTML = `
+   <div id="where-block-${whereIndex}">
+    <div class="component where-components">
+      <label for="where-type-${whereIndex}">Type:</label>
+      <select id="where-type-${whereIndex}">
+        <option value="">Select Where</option>
+        <option value="url">url</option>
+        <option value="path">path</option>
+        <option value="query">query</option>
+        <option value="page_tag">page tag</option>
+        <option value="role_tag">role tag</option>
+        <option value="user_attr">user_attr</option>
+        <option value="ent_attr">ent_attr</option>
+      </select>
+
+      <label for="where-operation-${whereIndex}">Operation:</label>
+      <select id="where-operation-${whereIndex}">
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+        <option value="startsWith">startsWith</option>
+        <option value="endsWith">endsWith</option>
+        <option value="contains">contains</option>
+        <option value="greaterThan">greater than</option>
+      </select>
+
+      <label for="where-value-${whereIndex}">Value:</label>
+      <input type="text" id="where-value-${whereIndex}" placeholder="Enter value">
+    </div>
+    <div class="component">
+      <select id="and-or">
+        <option value="and">AND</option>
+        <option value="or">OR</option>
+      </select>
+      <button id="add-where-btn" onclick="addWhereBlock()">+</button>
+      <button class="remove-where-btn" onclick="removeWhere(${whereIndex})">-</button>
+    </div>
+    </div>
+  `;
+
+  whereContainer.appendChild(newWhereBlock);
+}
+
+function removeWhere(whereIndex) {
+	console.log(whereIndex);
+  const whereBlock = document.querySelector(`#where-block-${whereIndex}`);
+  whereBlock.remove();
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
   const tabs = document.querySelectorAll(".tabs li");
   const tabPanes = document.querySelectorAll(".tab-pane");
-  const eventTypeRadios = document.querySelectorAll('input[name="event-type"]');
+  const eventTypeRadios = document.querySelectorAll('input[name^="event-type"]');
 
   tabs.forEach((tab) => {
-    tab.addEventListener("click", function () {
+    tab.addEventListener("click", function() {
       const tabId = this.getAttribute("data-tab");
       tabs.forEach((tab) => tab.classList.remove("active"));
       tabPanes.forEach((pane) => pane.classList.remove("active"));
@@ -78,17 +142,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   eventTypeRadios.forEach((radio) => {
-    radio.addEventListener("change", function () {
+    radio.addEventListener("change", function() {
       const whenIndex = this.getAttribute("data-when-index");
       handleEventTypeChange(whenIndex);
     });
   });
 
+
+  const addWhereBtn = document.getElementById("add-where-btn");
+  addWhereBtn.addEventListener("click", addWhereBlock);
+
   let whenIndex = 0;
   const addWhenBtn = document.getElementById("add-when-btn");
   const whenContainer = document.getElementById("when-container");
 
-  addWhenBtn.addEventListener("click", function () {
+    addWhenBtn.addEventListener("click", function () {
     const newWhenBlock = document.createElement("div");
     newWhenBlock.classList.add("when-block");
     newWhenBlock.setAttribute("data-when-index", whenIndex);
@@ -212,6 +280,4 @@ document.addEventListener("DOMContentLoaded", function () {
     handleEventTypeChange(whenIndex);
     whenIndex++;
   });
-
-  
 });
