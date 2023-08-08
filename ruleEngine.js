@@ -125,6 +125,22 @@ function removeWhere(whereIndex) {
   whereBlock.remove();
 }
 
+  function addProcessorBlock(addBtn) {
+  const processorBlock = addBtn.closest('.processors-component');
+  const processorDropdown = processorBlock.querySelector('.processor-dropdown');
+  const newProcessorBlock = processorDropdown.cloneNode(true);
+	processorBlock.insertAdjacentElement('beforeend', newProcessorBlock);
+}
+
+function removeProcessorBlock(removeBtn) {
+  const processorBlock = removeBtn.closest('.processor-dropdown');
+  if (processorBlock.parentElement.childElementCount > 1) {
+    processorBlock.remove();
+  }
+}
+
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
   const tabs = document.querySelectorAll(".tabs li");
@@ -146,6 +162,63 @@ document.addEventListener("DOMContentLoaded", function() {
       const whenIndex = this.getAttribute("data-when-index");
       handleEventTypeChange(whenIndex);
     });
+  });
+  
+  const addSequenceBtn = document.querySelector(".add-sequence-btn");
+  addSequenceBtn.addEventListener("click", function(){
+  	const sequencesContainer = document.querySelector(".sequences-container");
+  const newSequenceBlock = document.createElement("div");
+  newSequenceBlock.classList.add("sequence");
+
+  newSequenceBlock.innerHTML = `
+    <div class="component fetcher-component">
+                <label for="fetcher">Fetcher:</label>
+                <select class="fetcher">
+                  <option value="">Select Fetcher</option>
+                  <option value="element">Elements</option>
+                  <option value="network-call">Network Call</option>
+                  <option value="variable">Variable</option>
+                  <option value="local-storage">Local Storage</option>
+                  <option value="session-storage">Session Storage</option>
+                  <option value="function-invocation">Function Invocation to read value</option>
+                  <option value="read-from-persist">Read from persist</option>
+                </select>
+              </div>
+              <div class="processor-block">
+                <div class="component processors-component">
+                  <div class="processor-label-addition">
+                  <label for="processor">Processor:</label>
+                  <button class="add-processor-btn" onclick="addProcessorBlock(this)">+</button>
+                  </div>
+                  <div class="processor-dropdown">
+                    <select class="processors">
+                      <option value="">Select Processor</option>
+                      <option value="read-attribute">Read Attribute</option>
+                      <option value="string-operation">String Operation</option>
+                      <option value="json-operation">JSON Operation</option>
+                      <option value="number-operation">Number Operation</option>
+                    </select>
+                    <button class="remove-processor-btn" onclick="removeProcessorBlock(this)">-</button>
+                  </div>
+                </div>
+              </div>
+              <div class="component action-component">
+                <label for="action">Action:</label>
+                <select class="action">
+                  <option value="">Select Action</option>
+                  <option value="scroll-into-view">Scroll Into View</option>
+                  <option value="event-propagation">Event Propagation</option>
+                  <option value="_wfx_function-invocation">_wfx_function invocation</option>
+                  <option value="_wfx_setting_customizer">_wfx_setting_customizer</option>
+                  <option value="persist">Persist</option>
+                  <option value="fire-custom-event">Fire Custom Event</option>
+                  <option value="function-invocation">Function Invocation</option>
+                </select>
+              </div>
+              <button class="remove-sequence-btn">Remove Sequence</button>
+  `;
+
+  sequencesContainer.insertBefore(newSequenceBlock, addSequenceBtn);
   });
 
 
