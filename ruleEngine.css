@@ -6,6 +6,12 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .tabs {
@@ -13,18 +19,20 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
+  border-bottom: 1px solid #ccc;
 }
 
 .tabs li {
   cursor: pointer;
   padding: 10px 20px;
+  background-color: #f0f0f0;
   border: 1px solid #ccc;
   border-radius: 5px 5px 0 0;
-  background-color: #f0f0f0;
 }
 
 .tabs li.active {
   background-color: #fff;
+  border-bottom: none;
 }
 
 .tab-content {
@@ -42,7 +50,7 @@ body {
 }
 
 .component {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .hide {
@@ -57,14 +65,14 @@ body {
 .component select,
 .component input[type="text"],
 .component input[type="number"] {
-  padding: 5px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 200px;
+  width: 100%;
 }
 
 .component button {
-  padding: 5px 10px;
+  padding: 8px 15px;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -75,8 +83,9 @@ body {
 .when-block {
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .when-block h4 {
@@ -85,16 +94,23 @@ body {
 
 .when-block .remove-when-btn {
   margin-bottom: 5px;
+  background-color: #dc3545;
+}
+
+.when-block .remove-when-btn:hover {
+  background-color: #c82333;
 }
 
 /* Custom Styling for WHEN Options */
 .component.app-state-options,
-.component.whatfix-callbacks-options {
+.component.whatfix-callbacks-options,
+.component.custom-event-options {
   margin-top: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .mutation-options,
@@ -116,4 +132,73 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.component.where-components {
+  display: flex;
+  align-items: center;
+}
+
+.component.where-components label {
+  margin-right: 10px; /* Added margin between label and select/input */
+  flex: 0 0 auto;
+}
+
+.component.where-components select,
+.component.where-components input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-right: 10px; /* Added margin between select/input elements */
+}
+
+.component #and-or {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 100px;
+}
+
+/* Style for Add WHERE button */
+#add-where-btn {
+  padding: 8px 15px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#add-where-btn:hover {
+  background-color: #218838;
+}
+
+/* Additional styling for WHERE blocks */
+.where-block {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.remove-where-btn {
+  background-color: #dc3545 !important;
+}
+
+/* Additional styling for WHERE blocks */
+.where-block {
+  position: relative;
+}
+
+/* Styling for AND/OR options */
+.where-components .and-or-options {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.and-or-options label {
+  margin-right: 5px;
 }
