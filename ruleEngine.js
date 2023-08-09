@@ -3,60 +3,28 @@ function handleEventTypeChange(whenIndex) {
   const appStateOptions = document.getElementById(`app-state-options-${whenIndex}`);
   const whatfixCallbacksOptions = document.getElementById(`whatfix-callbacks-options-${whenIndex}`);
   const customEventOptions = document.getElementById(`custom-event-options-${whenIndex}`);
-  const mutationOptions = document.getElementById(`mutation-options-${whenIndex}`);
-  const repeatsForOptions = document.getElementById(`repeats-for-options-${whenIndex}`);
-  const repeatForSelect = document.getElementById(`repeat-for-${whenIndex}`);
-  const whatfixData1 = document.getElementById(`whatfix-data1-${whenIndex}`);
-  const whatfixData2 = document.getElementById(`whatfix-data2-${whenIndex}`);
-  const eventData1 = document.getElementById(`event-data1-${whenIndex}`);
-  const eventData2 = document.getElementById(`event-data2-${whenIndex}`);
 
   if (eventTypeRadios[0].checked) {
     appStateOptions.classList.remove("hide");
     whatfixCallbacksOptions.classList.add("hide");
-    whatfixData1.classList.add("hide");
-    whatfixData2.classList.add("hide");
     customEventOptions.classList.add("hide");
-    eventData1.classList.add("hide");
-    eventData2.classList.add("hide");
   } else if (eventTypeRadios[1].checked) {
     appStateOptions.classList.add("hide");
+    console.log("wow");
     whatfixCallbacksOptions.classList.remove("hide");
-    whatfixData1.classList.remove("hide");
-    whatfixData2.classList.remove("hide");
     customEventOptions.classList.add("hide");
-    eventData1.classList.add("hide");
-    eventData2.classList.add("hide");
   } else if (eventTypeRadios[2].checked) {
     appStateOptions.classList.add("hide");
     whatfixCallbacksOptions.classList.add("hide");
-    whatfixData1.classList.add("hide");
-    whatfixData2.classList.add("hide");
     customEventOptions.classList.remove("hide");
-    eventData1.classList.remove("hide");
-    eventData2.classList.remove("hide");
     // Show/hide event data options based on selected filter
   } else {
     appStateOptions.classList.add("hide");
     whatfixCallbacksOptions.classList.add("hide");
-    whatfixData1.classList.add("hide");
-    whatfixData2.classList.add("hide");
     customEventOptions.classList.add("hide");
-    eventData1.classList.add("hide");
-    eventData2.classList.add("hide");
-  }
-
-  if (repeatForSelect.value === "mutation") {
-    mutationOptions.classList.remove("hide");
-    repeatsForOptions.classList.add("hide");
-  } else if (repeatForSelect.value === "repeats-for") {
-    mutationOptions.classList.add("hide");
-    repeatsForOptions.classList.remove("hide");
-  } else {
-    mutationOptions.classList.add("hide");
-    repeatsForOptions.classList.add("hide");
   }
 }
+
 
 function handleAndOrChange(whenIndex) {
   const andOrSelect = document.getElementById(`and-or-${whenIndex}`);
@@ -120,21 +88,22 @@ function addWhereBlock() {
 }
 
 function removeWhere(whereIndex) {
-	console.log(whereIndex);
+  console.log(whereIndex);
   const whereBlock = document.querySelector(`#where-block-${whereIndex}`);
   whereBlock.remove();
 }
 
-  function addProcessorBlock(addBtn) {
+function addProcessorBlock(addBtn) {
   const processorBlock = addBtn.closest('.processors-component');
   const processorDropdown = processorBlock.querySelector('.processor-dropdown');
   const newProcessorBlock = processorDropdown.cloneNode(true);
-	processorBlock.insertAdjacentElement('beforeend', newProcessorBlock);
+  processorBlock.insertAdjacentElement('beforeend', newProcessorBlock);
 }
 
 function removeProcessorBlock(removeBtn) {
   const processorBlock = removeBtn.closest('.processor-dropdown');
-  if (processorBlock.parentElement.childElementCount > 1) {
+  console.log(processorBlock.parentElement.childElementCount);
+  if (processorBlock.parentElement.childElementCount > 2) {
     processorBlock.remove();
   }
 }
@@ -142,6 +111,136 @@ function removeProcessorBlock(removeBtn) {
 function removeSequenceBlock(removeBtn) {
   const sequenceBlock = removeBtn.closest('.sequence');
   sequenceBlock.remove();
+}
+
+let filterCounts = {};
+let filterCountsCustom = {};
+let filterCountsWhatfix = {};
+
+function addFilter(whenIndex) {
+  const filterContainer = document.querySelector(`#filter-container-${whenIndex}`);
+
+  // Get the current filter count for this whenIndex
+  let filterIndex = filterCounts[whenIndex] || 1;
+
+  // Create a new filter row
+  const newFilterRow = document.createElement("div");
+  newFilterRow.classList.add("filter-row");
+  newFilterRow.innerHTML = `
+        <select class="filter-dropdown" id="filter-${filterIndex}-${whenIndex}">
+            <option value="read-persist">Read from persist</option>
+            <option value="local-storage">Local Storage</option>
+            <option value="session-storage">Session Storage</option>
+            <option value="cookie">Cookie</option>
+            <option value="variable">Variable</option>
+            <option value="element">Element</option>
+        </select>
+        <div class="and-or-component">
+            <select class="and-or-dropdown" id="and-or-${filterIndex}-${whenIndex}">
+                <option value="and">AND</option>
+                <option value="or">OR</option>
+            </select>
+            <button class="add-filter-btn" onclick="addFilter(${whenIndex})">+</button>
+            <button class="remove-filter-btn" onclick="removeFilter(${filterIndex}, ${whenIndex})">-</button>
+        </div>
+    `;
+
+  // Append the new filter row to the filter container
+  filterContainer.appendChild(newFilterRow);
+
+  // Increment the filter count for this whenIndex
+  filterCounts[whenIndex] = filterIndex + 1;
+}
+
+function removeFilter(filterIndex, whenIndex) {
+  const filterRow = document.querySelector(`#filter-${filterIndex}-${whenIndex}`);
+  filterRow.remove();
+  const andOrDropdown = document.querySelector(`#and-or-${filterIndex}-${whenIndex}`);
+  andOrDropdown.parentElement.remove();
+}
+
+function addFilterCustom(whenIndex) {
+  const filterContainer = document.querySelector(`#filter-container-custom-${whenIndex}`);
+
+  // Get the current filter count for this whenIndex
+  let filterIndex = filterCountsCustom[whenIndex] || 1;
+
+  // Create a new filter row
+  const newFilterRow = document.createElement("div");
+  newFilterRow.classList.add("filter-row");
+  newFilterRow.innerHTML = `
+        <select class="filter-dropdown" id="filter-${filterIndex}-custom-${whenIndex}">
+            <option value="read-persist">Read from persist</option>
+            <option value="local-storage">Local Storage</option>
+            <option value="session-storage">Session Storage</option>
+            <option value="cookie">Cookie</option>
+            <option value="variable">Variable</option>
+            <option value="element">Element</option>
+        </select>
+        <div class="and-or-component">
+            <select class="and-or-dropdown" id="and-or-${filterIndex}-custom-${whenIndex}">
+                <option value="and">AND</option>
+                <option value="or">OR</option>
+            </select>
+            <button class="add-filter-btn" onclick="addFilterCustom(${whenIndex})">+</button>
+            <button class="remove-filter-btn" onclick="removeFilterCustom(${filterIndex}, ${whenIndex})">-</button>
+        </div>
+    `;
+
+  // Append the new filter row to the filter container
+  filterContainer.appendChild(newFilterRow);
+
+  // Increment the filter count for this whenIndex
+  filterCountsCustom[whenIndex] = filterIndex + 1;
+}
+
+function removeFilterCustom(filterIndex, whenIndex) {
+  const filterRow = document.querySelector(`#filter-${filterIndex}-custom-${whenIndex}`);
+  filterRow.remove();
+  const andOrDropdown = document.querySelector(`#and-or-${filterIndex}-custom-${whenIndex}`);
+  andOrDropdown.parentElement.remove();
+}
+
+function addFilterWhatfix(whenIndex) {
+  const filterContainer = document.querySelector(`#filter-container-whatfix-${whenIndex}`);
+
+  // Get the current filter count for this whenIndex
+  let filterIndex = filterCountsWhatfix[whenIndex] || 1;
+
+  // Create a new filter row
+  const newFilterRow = document.createElement("div");
+  newFilterRow.classList.add("filter-row");
+  newFilterRow.innerHTML = `
+        <select class="filter-dropdown" id="filter-${filterIndex}-custom-${whenIndex}">
+            <option value="read-persist">Read from persist</option>
+            <option value="local-storage">Local Storage</option>
+            <option value="session-storage">Session Storage</option>
+            <option value="cookie">Cookie</option>
+            <option value="variable">Variable</option>
+            <option value="element">Element</option>
+        </select>
+        <div class="and-or-component">
+            <select class="and-or-dropdown" id="and-or-${filterIndex}-whatfix-${whenIndex}">
+                <option value="and">AND</option>
+                <option value="or">OR</option>
+            </select>
+            <button class="add-filter-btn" onclick="addFilterWhatfix(${whenIndex})">+</button>
+            <button class="remove-filter-btn" onclick="removeFilterWhatfix(${filterIndex}, ${whenIndex})">-</button>
+        </div>
+    `;
+
+  // Append the new filter row to the filter container
+  filterContainer.appendChild(newFilterRow);
+
+  // Increment the filter count for this whenIndex
+  filterCountsWhatfix[whenIndex] = filterIndex + 1;
+}
+
+function removeFilterWhatfix(filterIndex, whenIndex) {
+  const filterRow = document.querySelector(`#filter-${filterIndex}-whatfix-${whenIndex}`);
+  filterRow.remove();
+  const andOrDropdown = document.querySelector(`#and-or-${filterIndex}-whatfix-${whenIndex}`);
+  andOrDropdown.parentElement.remove();
 }
 
 
@@ -166,14 +265,14 @@ document.addEventListener("DOMContentLoaded", function() {
       handleEventTypeChange(whenIndex);
     });
   });
-  
-  const addSequenceBtn = document.querySelector(".add-sequence-btn");
-  addSequenceBtn.addEventListener("click", function(){
-  	const sequencesContainer = document.querySelector(".sequences-container");
-  const newSequenceBlock = document.createElement("div");
-  newSequenceBlock.classList.add("sequence");
 
-  newSequenceBlock.innerHTML = `
+  const addSequenceBtn = document.querySelector(".add-sequence-btn");
+  addSequenceBtn.addEventListener("click", function() {
+    const sequencesContainer = document.querySelector(".sequences-container");
+    const newSequenceBlock = document.createElement("div");
+    newSequenceBlock.classList.add("sequence");
+
+    newSequenceBlock.innerHTML = `
     <div class="component fetcher-component">
                 <label for="fetcher">Fetcher:</label>
                 <select class="fetcher">
@@ -221,7 +320,7 @@ document.addEventListener("DOMContentLoaded", function() {
               <button class="remove-sequence-btn" onclick="removeSequenceBlock(this)">Remove Sequence</button>
   `;
 
-  sequencesContainer.insertBefore(newSequenceBlock, addSequenceBtn);
+    sequencesContainer.insertBefore(newSequenceBlock, addSequenceBtn);
   });
 
 
@@ -232,7 +331,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const addWhenBtn = document.getElementById("add-when-btn");
   const whenContainer = document.getElementById("when-container");
 
-    addWhenBtn.addEventListener("click", function () {
+  addWhenBtn.addEventListener("click", function() {
     const newWhenBlock = document.createElement("div");
     newWhenBlock.classList.add("when-block");
     newWhenBlock.setAttribute("data-when-index", whenIndex);
@@ -249,111 +348,189 @@ document.addEventListener("DOMContentLoaded", function() {
         <label for="event-custom-callbacks-${whenIndex}">Custom Event</label>
       </div>
       <div class="component app-state-options hide" id="app-state-options-${whenIndex}">
-        <label>Delay:</label>
-        <input type="number" id="delay-${whenIndex}" placeholder="Enter delay in seconds">
-        <label>Repeat For:</label>
-        <select class="repeat-for" id="repeat-for-${whenIndex}" onchange="handleEventTypeChange(${whenIndex})">
-          <option value="">Select an option</option>
-          <option value="mutation">Mutation</option>
-          <option value="repeats-for">Repeats For</option>
-        </select>
-        <div class="mutation-options hide" id="mutation-options-${whenIndex}">
-          <label>Time:</label>
-          <input type="number" id="mutation-time-${whenIndex}" placeholder="Enter time in seconds">
+        <!-- Properties -->
+        <div class="properties">
+        	<div class="delay">
+          <label>Delay:</label>
+          <div class="increase-decrease">
+            <input type="number" id="delay-${whenIndex}" placeholder="Enter delay in seconds">
+          </div>
+          </div>
+          <div class="retry">
+          <label>Retry:</label>
+          <div class="increase-decrease">
+            <input type="number" id="retry-times-${whenIndex}" placeholder="Times">
+            <input type="number" id="retry-frequency-${whenIndex}" placeholder="Frequency">
+          </div>
+          </div>
         </div>
-        <div class="repeats-for-options hide" id="repeats-for-options-${whenIndex}">
-          <label>Times:</label>
-          <input type="number" id="repeats-times-${whenIndex}" placeholder="Enter number of times">
-          <label>For:</label>
-          <input type="number" id="repeats-time-${whenIndex}" placeholder="Enter time in milliseconds">
-        </div>
-        <label>Filter:</label>
-        <select id="filter-${whenIndex}">
-          <option value="read-persist">Read from persist</option>
-          <option value="local-storage">Local Storage</option>
-          <option value="session-storage">Session Storage</option>
-          <option value="cookie">Cookie</option>
-          <option value="variable">Variable</option>
-          <option value="element">Element</option>
-        </select>
-      </div>
-            <div class="component whatfix-callbacks-options hide" id="whatfix-callbacks-options-${whenIndex}">
-        <h4>Whatfix Callbacks</h4>
-        <div class="component">
-          <label>Content Type:</label>
-          <select id="whatfix-content-type-${whenIndex}">
-            <option value="">Select Content Type</option>
-            <option value="flow">Flow</option>
-            <option value="beacon">Beacon</option>
-            <option value="popup">Popup</option>
-            <option value="self-help">Self Help</option>
-          </select>
-        </div>
-        <div class="component">
-          <label>Event Type:</label>
-          <select id="whatfix-event-type-${whenIndex}">
-            <option value="">Select Event Type</option>
-            <option value="before-start">Before Start</option>
-            <option value="after-start">After Start</option>
-            <option value="on-widget-open">On Widget Open</option>
-            <!-- Add more options as needed -->
-          </select>
-        </div>
-        <div class="component">
-          <label>Choose Filter:</label>
-          <select id="whatfix-filter-${whenIndex}">
-            <option value="">Select Filter</option>
-            <option value="read-persist">Read from persist</option>
-            <option value="local-storage">Local Storage</option>
-            <option value="session-storage">Session Storage</option>
-            <option value="cookie">Cookie</option>
-            <option value="variable">Variable</option>
+        <!-- Trigger Point -->
+        <div class="trigger-point">
+          <label>Trigger Point:</label>
+          <div class="trigger-point-options">
+          <select id="trigger-point-${whenIndex}">
+            <option value="global">Global</option>
             <option value="element">Element</option>
-            <option value="flow-id">Flow ID</option>
+          </select>
+          <select id="trigger-type-${whenIndex}">
+            <option value="mutation">Mutation</option>
             <option value="event">Event</option>
           </select>
+          </div>
         </div>
-        <div class="component hide" id="whatfix-data1-${whenIndex}">
-          <label>event.data1:</label>
-          <input type="text" id="whatfix-data1-value-${whenIndex}" placeholder="Enter value">
+        <!-- Filters -->
+        <div class="filters">
+            <label>Filters:</label>
+            <div id="filter-container-${whenIndex}">
+                <div class="filter-row">
+                    <select class="filter-dropdown" id="filter-1-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+            </div>
+                <div class="and-or-component">
+                    <select class="and-or-dropdown" id="and-or-1-${whenIndex}">
+                        <option value="and">AND</option>
+                        <option value="or">OR</option>
+                    </select>
+                    <button class="add-filter-btn" onclick="addFilter(${whenIndex})">+</button>
+                    <button class="remove-filter-btn" >-</button>
+                </div>
+            </div>
         </div>
-        <div class="component hide" id="whatfix-data2-${whenIndex}">
-          <label>event.data2:</label>
-          <input type="text" id="whatfix-data2-value-${whenIndex}" placeholder="Enter value">
-        </div>
+      
+      
       </div>
       <div class="component custom-event-options hide" id="custom-event-options-${whenIndex}">
-      <h4>Custom Event</h4>
-      <div class="component">
-        <label>Event Name:</label>
-        <input type="text" id="event-name-${whenIndex}" placeholder="Enter event name">
+        <!-- Properties -->
+        <div class="properties">
+          <label>Event Name:</label>
+          <input type="text" id="event-name-${whenIndex}" placeholder="Enter event name">
+        </div>
+        <!-- Filters -->
+        <div class="filters">
+            <label>Filters:</label>
+            <div class="custom-event-filter">
+            	<div>
+            	<label>Event Data1</label>
+            	<select>
+              	
+              </select>
+              </div>
+              <div>
+              <label>Event Data2</label>
+            	<select>
+              	
+              </select>
+              </div>
+            </div>
+            <div class="and-or-component-custom-filter">
+                    <select class="and-or-dropdown" >
+                        <option value="and">AND</option>
+                        <option value="or">OR</option>
+                    </select>
+                    
+                </div>
+            <div id="filter-container-custom-${whenIndex}">
+                <div class="filter-row">
+                    <select class="filter-dropdown" id="filter-1-custom-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+            </div>
+                <div class="and-or-component">
+                    <select class="and-or-dropdown" id="and-or-1-custom-${whenIndex}">
+                        <option value="and">AND</option>
+                        <option value="or">OR</option>
+                    </select>
+                    <button class="add-filter-btn" onclick="addFilterCustom(${whenIndex})">+</button>
+                    <button class="remove-filter-btn" onclick="removeFilterCustom(1, ${whenIndex})">-</button>
+                </div>
+            </div>
+        </div>
       </div>
-      <div class="component">
-        <label>Choose Filter:</label>
-        <select id="choose-filter-${whenIndex}" onchange="handleChooseFilterChange(${whenIndex})">
-          <option value="">Select Filter</option>
-          <option value="read-persist">Read from persist</option>
-          <option value="local-storage">Local Storage</option>
-          <option value="session-storage">Session Storage</option>
-          <option value="cookie">Cookie</option>
-          <option value="variable">Variable</option>
-          <option value="element">Element</option>
-          <option value="flow-id">Flow ID</option>
-          <option value="event">Event</option>
-        </select>
+      <div class="component whatfix-callbacks-options hide" id="whatfix-callbacks-options-${whenIndex}">
+        <!-- Properties -->
+        <div class="properties">
+          <label>Widget/Content Type:</label>
+          <select id="widget-type-${whenIndex}">
+            <option value="flows">Flows</option>
+            <option value="selfhelp">SelfHelp</option>
+            <option value="tasklist">TaskList</option>
+            <option value="popup">Popup</option>
+            <option value="beacon">Beacon</option>
+          </select>
+        </div>
+        <!-- Trigger Point -->
+        <div class="trigger-point">
+          <label>Trigger Point:</label>
+          <select id="trigger-type-${whenIndex}">
+            <option value="before-show">Before Show</option>
+            <option value="on-close">On Close</option>
+            <option value="on-open">On Open</option>
+          </select>
+        </div>
+        <!-- Filters -->
+        <div class="filters">
+            <label>Filters:</label>
+            <div class="custom-event-filter">
+            	<div>
+            	<label>Event Data1</label>
+            	<select>
+              	
+              </select>
+              </div>
+              <div>
+              <label>Event Data2</label>
+            	<select>
+              	
+              </select>
+              </div>
+            </div>
+            <div class="and-or-component-custom-filter">
+                    <select class="and-or-dropdown" >
+                        <option value="and">AND</option>
+                        <option value="or">OR</option>
+                    </select>
+                    
+                </div>
+            <div id="filter-container-whatfix-${whenIndex}">
+                <div class="filter-row">
+                    <select class="filter-dropdown" id="filter-1-whatfix-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+            </div>
+                <div class="and-or-component">
+                    <select class="and-or-dropdown" id="and-or-1-whatfix-${whenIndex}">
+                        <option value="and">AND</option>
+                        <option value="or">OR</option>
+                    </select>
+                    <button class="add-filter-btn" onclick="addFilterWhatfix(${whenIndex})">+</button>
+                    <button class="remove-filter-btn" onclick="removeFilterWhatfix(1, ${whenIndex})">-</button>
+                </div>
+            </div>
+        </div>
       </div>
-      <div class="component hide" id="event-data1-${whenIndex}">
-        <label>event.data1:</label>
-        <input type="text" id="event-data1-value-${whenIndex}" placeholder="Enter value">
-      </div>
-      <div class="component hide" id="event-data2-${whenIndex}">
-        <label>event.data2:</label>
-        <input type="text" id="event-data2-value-${whenIndex}" placeholder="Enter value">
-      </div>
-    </div>
     `;
+
     whenContainer.appendChild(newWhenBlock);
-    handleEventTypeChange(whenIndex);
+
     whenIndex++;
   });
 });
