@@ -270,3 +270,126 @@
     justify-content: end;
     align-items: center;
 }
+
+.component.hide {
+  display: none;
+}
+
+.properties {
+  display: flex;
+  flex-direction: column;
+}
+
+.delay {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.retry {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.increase-decrease {
+  display: flex;
+}
+
+.increase-decrease > input {
+  margin-right: 5px;
+}
+
+.trigger-point-options {
+  display: flex;
+  margin: 10px 0;
+}
+
+.trigger-point-options > select {
+  margin-right: 5px;
+}
+
+.and-or-component {
+  display: flex;
+  width: 50%;
+}
+
+.and-or-dropdown {
+  margin-right: 10px;
+}
+
+.filter-row {
+  width: 50%;
+  margin: 5px 0;
+}
+
+.add-filter-btn {
+  margin-right: 5px;
+  background-color: #28a745 !important;
+}
+
+.filter-dropdown {
+  margin: 5px 0;
+}
+
+.filter-row .and-or-component {
+  width: 100%;
+}
+
+.trigger-point {
+  margin-top: 10px;
+}
+
+.filters {
+  margin-top: 20px;
+}
+
+.remove-filter-btn {
+  background-color: #dc3545 !important;
+}
+
+.custom-event-options .properties {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.custom-event-options .properties > input {
+  width: 35%;
+}
+
+.custom-event-filter {
+  display: flex;
+  margin: 8px 0;
+}
+
+.custom-event-filter > div {
+  margin-right: 5px;
+}
+
+.and-or-component-custom-filter {
+  display: flex;
+  width: 30%;
+}
+
+.whatfix-callbacks-options .properties {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.whatfix-callbacks-options .properties > select {
+  width: 40% !important;
+}
+
+.whatfix-callbacks-options .trigger-point {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.whatfix-callbacks-options .trigger-point > select {
+  width: 40% !important;
+}
