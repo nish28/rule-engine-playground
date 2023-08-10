@@ -28,9 +28,7 @@
               <option value="path">path</option>
               <option value="query">query</option>
               <option value="page_tag">page tag</option>
-              <option value="role_tag">role tag</option>
-              <option value="user_attr">user_attr</option>
-              <option value="ent_attr">ent_attr</option>
+              <option value="hash">hash</option>
             </select>
 
             <label for="where-operation">Operation:</label>
@@ -40,7 +38,7 @@
               <option value="startsWith">startsWith</option>
               <option value="endsWith">endsWith</option>
               <option value="contains">contains</option>
-              <option value="greaterThan">greater than</option>
+              <option value="not contains">not contains</option>
             </select>
 
             <label for="where-value">Value:</label>
@@ -68,11 +66,11 @@
                 <label for="fetcher">Fetcher:</label>
                 <select class="fetcher">
                   <option value="">Select Fetcher</option>
-                  <option value="element">Elements</option>
-                  <option value="network-call">Network Call</option>
-                  <option value="variable">Variable</option>
-                  <option value="local-storage">Local Storage</option>
-                  <option value="session-storage">Session Storage</option>
+                  <option value="element">Elements (Element definition will be asked)</option>
+                  <option value="network-call">Network Call (Details will be asked)</option>
+                  <option value="variable">Variable (variable name would be asked)</option>
+                  <option value="local-storage">Local Storage (key would be asked)</option>
+                  <option value="session-storage">Session Storage (key would be asked)</option>
                   <option value="function-invocation">Function Invocation to read value</option>
                   <option value="read-from-persist">Read from persist</option>
                 </select>
@@ -86,10 +84,10 @@
                   <div class="processor-dropdown">
                     <select class="processors">
                       <option value="">Select Processor</option>
-                      <option value="read-attribute">Read Attribute</option>
-                      <option value="string-operation">String Operation</option>
-                      <option value="json-operation">JSON Operation</option>
-                      <option value="number-operation">Number Operation</option>
+                      <option value="read-attribute">Read Attribute (key would be asked)</option>
+                      <option value="string-operation">String Operation (all String ops would be given)</option>
+                      <option value="json-operation">JSON Operation (all json ops would be given)</option>
+                      <option value="number-operation">Number Operation (all number ops would be given)</option>
                     </select>
                     <button class="remove-processor-btn" onclick="removeProcessorBlock(this)">-</button>
                   </div>
@@ -106,6 +104,7 @@
                   <option value="persist">Persist</option>
                   <option value="fire-custom-event">Fire Custom Event</option>
                   <option value="function-invocation">Function Invocation</option>
+                  <option value="reuse"> Reuse </option>
                 </select>
               </div>
               <button class="remove-sequence-btn" onclick="removeSequenceBlock(this)">Remove Sequence</button>
