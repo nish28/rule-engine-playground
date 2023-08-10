@@ -11,12 +11,13 @@
   <body>
     <div class="container">
       <h2>Rule Engine</h2>
-      <ul class="tabs">
+      <div class=rule-block>
+        <ul class="tabs">
         <li class="active" data-tab="where-tab">WHERE</li>
         <li data-tab="when-tab">WHEN</li>
         <li data-tab="what-tab">WHAT</li>
       </ul>
-      <div class="tab-content">
+        <div class="tab-content">
         <div id="where-tab" class="tab-pane active">
           <h3>WHERE</h3>
           <div class="component where-components">
@@ -113,6 +114,8 @@
           </div>
 
         </div>
+      </div>
+        <button class="add-rule-btn">Add Rule+</button>
       </div>
     </div>
     <script src="ruleEngine.js"></script>
