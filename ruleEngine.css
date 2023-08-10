@@ -319,7 +319,7 @@
 }
 
 .filter-row {
-  width: 50%;
+  display: flex;
   margin: 5px 0;
 }
 
@@ -329,7 +329,7 @@
 }
 
 .filter-dropdown {
-  margin: 5px 0;
+  margin: 5px 5px 5px 0;
 }
 
 .filter-row .and-or-component {
@@ -352,6 +352,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 16px;
 }
 
 .custom-event-options .properties > input {
@@ -388,8 +389,57 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 5px;
+  justify-content: space-between;
+}
+
+.whatfix-callbacks-options .trigger-point .callbacks-dropdown {
+  display: flex;
+  flex-direction: column;
+}
+
+.callbacks-dropdown {
+  margin-right: 5px;
 }
 
 .whatfix-callbacks-options .trigger-point > select {
   width: 40% !important;
+}
+
+.margin-right {
+  margin-right: 5px;
+}
+
+.margin-right > input {
+  margin-top: 5px;
+  width: auto !important;
+}
+
+.custom-event-options .custom-event-filter {
+  display : flex;
+  flex-direction: column;
+}
+
+.event-data-filter {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin-right: 5px;
+}
+
+.rule-block {
+  margin-bottom: 16px;
+}
+
+.rule-block-1 {
+    pointer-events: none;
+  opacity: 0.6; 
+  background-color: #f0f0f0; 
+  color: #aaa; 
+  border: 1px solid #ccc; 
+  cursor: not-allowed;
 }
