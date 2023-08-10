@@ -50,24 +50,22 @@ function addWhereBlock() {
     <div class="component where-components">
       <label for="where-type-${whereIndex}">Type:</label>
       <select id="where-type-${whereIndex}">
-        <option value="">Select Where</option>
-        <option value="url">url</option>
-        <option value="path">path</option>
-        <option value="query">query</option>
-        <option value="page_tag">page tag</option>
-        <option value="role_tag">role tag</option>
-        <option value="user_attr">user_attr</option>
-        <option value="ent_attr">ent_attr</option>
+                      <option value="">Select Where</option>
+              <option value="url">url</option>
+              <option value="path">path</option>
+              <option value="query">query</option>
+              <option value="page_tag">page tag</option>
+              <option value="hash">hash</option>
       </select>
 
       <label for="where-operation-${whereIndex}">Operation:</label>
       <select id="where-operation-${whereIndex}">
         <option value="=">=</option>
-        <option value="!=">!=</option>
-        <option value="startsWith">startsWith</option>
-        <option value="endsWith">endsWith</option>
-        <option value="contains">contains</option>
-        <option value="greaterThan">greater than</option>
+              <option value="!=">!=</option>
+              <option value="startsWith">startsWith</option>
+              <option value="endsWith">endsWith</option>
+              <option value="contains">contains</option>
+              <option value="not contains">not contains</option>
       </select>
 
       <label for="where-value-${whereIndex}">Value:</label>
@@ -132,28 +130,30 @@ function addFilter(whenIndex) {
                     <select class="filter-dropdown" id="filter-${filterIndex}-${whenIndex}">
                     <option value="select-filter-options">Select Filter Options</option>
                     <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="local-storage">Local Storage (key would be asked)</option>
+                    <option value="session-storage">Session Storage (key would be asked)</option>
+                    <option value="cookie">Cookie (key would be asked)</option>
+                    <option value="variable">Variable (variable name would be asked)</option>
+                    <option value="element">Element (element definition would be asked)</option>
                 </select>
                 </div>
                 <div class="margin-right">
                 <label>Ops</label>
                 <select class="filter-dropdown" id="filterOps-${filterIndex}-${whenIndex}">
-                    <option value="select-filter-options">Select Filter Options</option>
-                    <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="select-operations">Select Appropriate Option</option>
+                    <option value="exists">Exists</options>
+                    <option value="not-exists">Not Exists</option>
+                    <option value="contains">Contains</option>
+                    <option value="not-contains">Not Contains</option>
+                    <option value="equals">Equals</option>
+                    <option value="not equals">Not Equals</option>
+                    <option value="greater-then">Greater Then</option>
+                    <option value="less-then">Less Then</option>
                 </select>
                 </div>
                 <div class="margin-right">
                 <label>Value</label>
-                <input type="text" id="FilterValue-${filterIndex}-${whenIndex}" placeholder="Enter value">
+                <input type="text" id="FilterValue-${filterIndex}-${whenIndex}" placeholder="Will change as per type and operations">
                 </div>
             </div>
     `;
@@ -197,28 +197,33 @@ function addFilterCustom(whenIndex) {
                     <select class="filter-dropdown" id="filter-${filterIndex}-custom-${whenIndex}">
                     <option value="select-filter-options">Select Filter Options</option>
                     <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="local-storage">Local Storage (key would be asked)</option>
+                    <option value="session-storage">Session Storage (key would be asked)</option>
+                    <option value="cookie">Cookie (key would be asked)</option>
+                    <option value="variable">Variable (variable name would be asked)</option>
+                    <option value="element">Element (element definition would be asked)</option>
+                    <option value="event-data1">Event Data 1(key would be asked)</option>
+                    <option value="event-data2">Event Data 2(key would be asked)</option>
+                    <option value="event-data3">Event Data 3(key would be asked)</option>
                 </select>
                 </div>
                 <div class="margin-right">
                 <label>Ops</label>
                 <select class="filter-dropdown" id="filterOps-${filterIndex}-custom-${whenIndex}">
-                    <option value="select-filter-options">Select Filter Options</option>
-                    <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="select-filter-options">Select Appropriate Operation</option>
+                    <option value="exists">Exists</options>
+                    <option value="not-exists">Not Exists</option>
+                    <option value="contains">Contains</option>
+                    <option value="not-contains">Not Contains</option>
+                    <option value="equals">Equals</option>
+                    <option value="not equals">Not Equals</option>
+                    <option value="greater-then">Greater Then</option>
+                    <option value="less-then">Less Then</option>
                 </select>
                 </div>
                 <div class="margin-right">
                 <label>Value</label>
-                <input type="text" id="FilterValue-${filterIndex}-custom-${whenIndex}" placeholder="Enter value">
+                <input type="text" id="FilterValue-${filterIndex}-custom-${whenIndex}" placeholder="Will change as per type and operations">
                 </div>
     `;
    const newAndOrRow = document.createElement("div");
@@ -258,28 +263,33 @@ function addFilterWhatfix(whenIndex) {
                     <select class="filter-dropdown" id="filter-${filterIndex}-whatfix-${whenIndex}">
                     <option value="select-filter-options">Select Filter Options</option>
                     <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="local-storage">Local Storage (key would be asked)</option>
+                    <option value="session-storage">Session Storage (key would be asked)</option>
+                    <option value="cookie">Cookie (key would be asked)</option>
+                    <option value="variable">Variable (variable name would be asked)</option>
+                    <option value="element">Element (element definition would be asked)</option>
+                    <option value="flow-id">Flow Id</option>
+                    <option value="step-id">Step No</option>
+                    <option value="segment-name">Segment Name</option>
                 </select>
                 </div>
                 <div class="margin-right">
-                <label>Ops</label>
+                <label>Operations</label>
                 <select class="filter-dropdown" id="filterOps-${filterIndex}-whatfix-${whenIndex}">
-                    <option value="select-filter-options">Select Filter Options</option>
-                    <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="select-operations">Select Appropriate Option</option>
+                    <option value="exists">Exists</options>
+                    <option value="not-exists">Not Exists</option>
+                    <option value="contains">Contains</option>
+                    <option value="not-contains">Not Contains</option>
+                    <option value="equals">Equals</option>
+                    <option value="not equals">Not Equals</option>
+                    <option value="greater-then">Greater Then</option>
+                    <option value="less-then">Less Then</option>
                 </select>
                 </div>
                 <div class="margin-right">
                 <label>Value</label>
-                <input type="text" id="FilterValue-${filterIndex}-whatfix-${whenIndex}" placeholder="Enter value">
+                <input type="text" id="FilterValue-${filterIndex}-whatfix-${whenIndex}" placeholder="Will change as per type and operations">
                 </div>`;
     
     const newAndOrRow = document.createElement("div");
@@ -340,11 +350,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 <label for="fetcher">Fetcher:</label>
                 <select class="fetcher">
                   <option value="">Select Fetcher</option>
-                  <option value="element">Elements</option>
-                  <option value="network-call">Network Call</option>
-                  <option value="variable">Variable</option>
-                  <option value="local-storage">Local Storage</option>
-                  <option value="session-storage">Session Storage</option>
+                  <option value="element">Elements (Element definition will be asked)</option>
+                  <option value="network-call">Network Call (Details will be asked)</option>
+                  <option value="variable">Variable (variable name would be asked)</option>
+                  <option value="local-storage">Local Storage (key would be asked)</option>
+                  <option value="session-storage">Session Storage (key would be asked)</option>
                   <option value="function-invocation">Function Invocation to read value</option>
                   <option value="read-from-persist">Read from persist</option>
                 </select>
@@ -358,10 +368,10 @@ document.addEventListener("DOMContentLoaded", function() {
                   <div class="processor-dropdown">
                     <select class="processors">
                       <option value="">Select Processor</option>
-                      <option value="read-attribute">Read Attribute</option>
-                      <option value="string-operation">String Operation</option>
-                      <option value="json-operation">JSON Operation</option>
-                      <option value="number-operation">Number Operation</option>
+                      <option value="read-attribute">Read Attribute (key would be asked)</option>
+                      <option value="string-operation">String Operation (all String ops would be given)</option>
+                      <option value="json-operation">JSON Operation (all json ops would be given)</option>
+                      <option value="number-operation">Number Operation (all number ops would be given)</option>
                     </select>
                     <button class="remove-processor-btn" onclick="removeProcessorBlock(this)">-</button>
                   </div>
@@ -378,6 +388,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   <option value="persist">Persist</option>
                   <option value="fire-custom-event">Fire Custom Event</option>
                   <option value="function-invocation">Function Invocation</option>
+                  <option value="reuse"> Reuse </option>
                 </select>
               </div>
               <button class="remove-sequence-btn" onclick="removeSequenceBlock(this)">Remove Sequence</button>
@@ -432,12 +443,14 @@ document.addEventListener("DOMContentLoaded", function() {
           <label>Trigger Point:</label>
           <div class="trigger-point-options">
           <select id="trigger-point-${whenIndex}">
+          	<option value="select-scope">Select Scope</option>
             <option value="global">Global</option>
-            <option value="element">Element</option>
+            <option value="element">Element (element definition would be asked)</option>
           </select>
           <select id="trigger-type-${whenIndex}">
+          	<option value="select-trigger-action">Select Trigger Action</option>
             <option value="mutation">Mutation</option>
-            <option value="event">Event</option>
+            <option value="event">Event (Event name would be taken separately)</option>
           </select>
           </div>
         </div>
@@ -451,28 +464,30 @@ document.addEventListener("DOMContentLoaded", function() {
                     <select class="filter-dropdown" id="filter-1-${whenIndex}">
                     <option value="select-filter-options">Select Filter Options</option>
                     <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="local-storage">Local Storage (key would be asked)</option>
+                    <option value="session-storage">Session Storage (key would be asked)</option>
+                    <option value="cookie">Cookie (key would be asked)</option>
+                    <option value="variable">Variable (variable name would be asked)</option>
+                    <option value="element">Element (element definition would be asked)</option>
                 </select>
                 </div>
                 <div class="margin-right">
-                <label>Ops</label>
+                <label>Operations</label>
                 <select class="filter-dropdown" id="filterOps-1-${whenIndex}">
-                    <option value="select-filter-options">Select Filter Options</option>
-                    <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="select-operations">Select Appropriate Option</option>
+                    <option value="exists">Exists</options>
+                    <option value="not-exists">Not Exists</option>
+                    <option value="contains">Contains</option>
+                    <option value="not-contains">Not Contains</option>
+                    <option value="equals">Equals</option>
+                    <option value="not equals">Not Equals</option>
+                    <option value="greater-then">Greater Then</option>
+                    <option value="less-then">Less Then</option>
                 </select>
                 </div>
                 <div class="margin-right">
                 <label>Value</label>
-                <input type="text" id="FilterValue-1-${whenIndex}" placeholder="Enter value">
+                <input type="text" id="FilterValue-1-${whenIndex}" placeholder="Will change as per type and operations">
                 </div>
             </div>
                 <div class="and-or-component">
@@ -494,44 +509,6 @@ document.addEventListener("DOMContentLoaded", function() {
           <label>Event Name:</label>
           <input type="text" id="event-name-${whenIndex}" placeholder="Enter event name">
         </div>
-        <div class="custom-event-filter">
-            	<div class="event-data-filter">
-              <div class="flex-column">
-            	<label>Event Data1:</label>
-            	<select>
-              	
-              </select>
-              </div>
-              <div class="flex-column">
-              <label>Operation:</label>
-            	<select>
-              	
-              </select>
-              </div>
-              <div class="flex-column">
-              <label>Value:</label>
-            	<input type="text" id="FilterValue-1-${whenIndex}" placeholder="Enter value">
-              </div>
-              </div>
-              <div class="event-data-filter">
-              <div class="flex-column">
-            	<label>Event Data2:</label>
-            	<select>
-              	
-              </select>
-              </div>
-              <div class="flex-column">
-              <label>Operation:</label>
-            	<select>
-              	
-              </select>
-              </div>
-              <div class="flex-column">
-              <label>Value:</label>
-            	<input type="text" id="FilterValue-1-${whenIndex}" placeholder="Enter value">
-              </div>
-              </div>
-            </div>
         <!-- Filters -->
         <div class="filters">
             <label>Filters:</label>
@@ -542,28 +519,33 @@ document.addEventListener("DOMContentLoaded", function() {
                     <select class="filter-dropdown" id="filter-1-custom-${whenIndex}">
                     <option value="select-filter-options">Select Filter Options</option>
                     <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="local-storage">Local Storage (key would be asked)</option>
+                    <option value="session-storage">Session Storage (key would be asked)</option>
+                    <option value="cookie">Cookie (key would be asked)</option>
+                    <option value="variable">Variable (variable name would be asked)</option>
+                    <option value="element">Element (element definition would be asked)</option>
+                    <option value="event-data1">Event Data 1(key would be asked)</option>
+                    <option value="event-data2">Event Data 2(key would be asked)</option>
+                    <option value="event-data3">Event Data 3(key would be asked)</option>
                 </select>
                 </div>
                 <div class="margin-right">
-                <label>Ops</label>
+                <label>Operations</label>
                 <select class="filter-dropdown" id="filterOps-1-custom-${whenIndex}">
-                    <option value="select-filter-options">Select Filter Options</option>
-                    <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="select-filter-options">Select Appropriate Operation</option>
+                    <option value="exists">Exists</options>
+                    <option value="not-exists">Not Exists</option>
+                    <option value="contains">Contains</option>
+                    <option value="not-contains">Not Contains</option>
+                    <option value="equals">Equals</option>
+                    <option value="not equals">Not Equals</option>
+                    <option value="greater-then">Greater Then</option>
+                    <option value="less-then">Less Then</option>
                 </select>
                 </div>
                 <div class="margin-right">
                 <label>Value</label>
-                <input type="text" id="FilterValue-1-custom-${whenIndex}" placeholder="Enter value">
+                <input type="text" id="FilterValue-1-custom-${whenIndex}" placeholder="Will change as per type and operation">
                 </div>
             </div>
                 <div class="and-or-component">
@@ -580,8 +562,9 @@ document.addEventListener("DOMContentLoaded", function() {
       <div class="component whatfix-callbacks-options hide" id="whatfix-callbacks-options-${whenIndex}">
         <!-- Properties -->
         <div class="properties">
-          <label>Widget/Content Type:</label>
+          <label>Widget Type:</label>
           <select id="widget-type-${whenIndex}">
+          	<option value="all-widget-list">All Widget Lists</option>
             <option value="flows">Flows</option>
             <option value="selfhelp">SelfHelp</option>
             <option value="tasklist">TaskList</option>
@@ -594,25 +577,12 @@ document.addEventListener("DOMContentLoaded", function() {
         	<div class="callbacks-dropdown">
           <label>Trigger Point:</label>
           <select id="trigger-type-${whenIndex}">
+          	<option value="all-callback-of-widget">All callbacks listed</option>
             <option value="before-show">Before Show</option>
             <option value="on-close">On Close</option>
             <option value="on-open">On Open</option>
           </select>
           </div>
-          <div class="custom-event-filter">
-            	<div>
-            	<label>FlowName:</label>
-            	<select>
-              	
-              </select>
-              </div>
-              <div>
-              <label>StepId:</label>
-            	<select>
-              	
-              </select>
-              </div>
-            </div>
         </div>
         <!-- Filters -->
         <div class="filters">
@@ -624,28 +594,33 @@ document.addEventListener("DOMContentLoaded", function() {
                     <select class="filter-dropdown" id="filter-1-whatfix-${whenIndex}">
                     <option value="select-filter-options">Select Filter Options</option>
                     <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="local-storage">Local Storage (key would be asked)</option>
+                    <option value="session-storage">Session Storage (key would be asked)</option>
+                    <option value="cookie">Cookie (key would be asked)</option>
+                    <option value="variable">Variable (variable name would be asked)</option>
+                    <option value="element">Element (element definition would be asked)</option>
+                    <option value="flow-id">Flow Id</option>
+                    <option value="step-id">Step No</option>
+                    <option value="segment-name">Segment Name</option>
                 </select>
                 </div>
                 <div class="margin-right">
-                <label>Ops</label>
+                <label>Operations</label>
                 <select class="filter-dropdown" id="filterOps-1-whatfix-${whenIndex}">
-                    <option value="select-filter-options">Select Filter Options</option>
-                    <option value="read-persist">Read from persist</option>
-                    <option value="local-storage">Local Storage</option>
-                    <option value="session-storage">Session Storage</option>
-                    <option value="cookie">Cookie</option>
-                    <option value="variable">Variable</option>
-                    <option value="element">Element</option>
+                    <option value="select-operations">Select Appropriate Option</option>
+                    <option value="exists">Exists</options>
+                    <option value="not-exists">Not Exists</option>
+                    <option value="contains">Contains</option>
+                    <option value="not-contains">Not Contains</option>
+                    <option value="equals">Equals</option>
+                    <option value="not equals">Not Equals</option>
+                    <option value="greater-then">Greater Then</option>
+                    <option value="less-then">Less Then</option>
                 </select>
                 </div>
                 <div class="margin-right">
                 <label>Value</label>
-                <input type="text" id="FilterValue-1-whatfix-${whenIndex}" placeholder="Enter value">
+                <input type="text" id="FilterValue-1-whatfix-${whenIndex}" placeholder="Will change as per type and operations">
                 </div>
             </div>
                 <div class="and-or-component">
