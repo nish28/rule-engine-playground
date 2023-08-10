@@ -392,11 +392,17 @@
 
 .whatfix-callbacks-options .trigger-point .callbacks-dropdown {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  width: 60%;
+  align-items: center;
 }
 
 .callbacks-dropdown {
   margin-right: 30px;
+}
+
+.callbacks-dropdown > select {
+  width: 50%;
 }
 
 .whatfix-callbacks-options .trigger-point > select {
