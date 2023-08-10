@@ -94,7 +94,6 @@
 
 .when-block .remove-when-btn {
   margin-bottom: 5px;
-  background-color: #dc3545;
 }
 
 .when-block .remove-when-btn:hover {
@@ -440,4 +439,8 @@
   color: #aaa; 
   border: 1px solid #ccc; 
   cursor: not-allowed;
+}
+
+.add-rule-btn {
+  margin-top: 16px;
 }
