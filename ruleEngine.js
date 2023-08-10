@@ -121,39 +121,62 @@ function addFilter(whenIndex) {
   const filterContainer = document.querySelector(`#filter-container-${whenIndex}`);
 
   // Get the current filter count for this whenIndex
-  let filterIndex = filterCounts[whenIndex] || 1;
+  let filterIndex = filterCounts[whenIndex] || 2;
 
   // Create a new filter row
   const newFilterRow = document.createElement("div");
   newFilterRow.classList.add("filter-row");
   newFilterRow.innerHTML = `
-        <select class="filter-dropdown" id="filter-${filterIndex}-${whenIndex}">
-            <option value="read-persist">Read from persist</option>
-            <option value="local-storage">Local Storage</option>
-            <option value="session-storage">Session Storage</option>
-            <option value="cookie">Cookie</option>
-            <option value="variable">Variable</option>
-            <option value="element">Element</option>
-        </select>
-        <div class="and-or-component">
-            <select class="and-or-dropdown" id="and-or-${filterIndex}-${whenIndex}">
-                <option value="and">AND</option>
-                <option value="or">OR</option>
-            </select>
-            <button class="add-filter-btn" onclick="addFilter(${whenIndex})">+</button>
-            <button class="remove-filter-btn" onclick="removeFilter(${filterIndex}, ${whenIndex})">-</button>
-        </div>
+        <div class="margin-right">
+                		<label>Type</label>
+                    <select class="filter-dropdown" id="filter-${filterIndex}-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+                </div>
+                <div class="margin-right">
+                <label>Ops</label>
+                <select class="filter-dropdown" id="filterOps-${filterIndex}-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+                </div>
+                <div class="margin-right">
+                <label>Value</label>
+                <input type="text" id="FilterValue-${filterIndex}-${whenIndex}" placeholder="Enter value">
+                </div>
+            </div>
     `;
 
   // Append the new filter row to the filter container
   filterContainer.appendChild(newFilterRow);
+  const newAndOrRow = document.createElement("div");
+  newAndOrRow.classList.add("and-or-component");
+  newAndOrRow.innerHTML = `<select class="and-or-dropdown" id="and-or-${filterIndex}-${whenIndex}">
+  <option value="and">AND</option>
+  <option value="or">OR</option>
+</select>
+<button class="add-filter-btn" onclick="addFilter(${whenIndex})">+</button>
+<button class="remove-filter-btn" onclick="removeFilter(${filterIndex}, ${whenIndex})">-</button>`;
+  
+  filterContainer.appendChild(newAndOrRow);
 
   // Increment the filter count for this whenIndex
   filterCounts[whenIndex] = filterIndex + 1;
 }
 
 function removeFilter(filterIndex, whenIndex) {
-  const filterRow = document.querySelector(`#filter-${filterIndex}-${whenIndex}`);
+  const filterRow = document.querySelector(`#filter-${filterIndex}-${whenIndex}`).parentElement.parentElement;
   filterRow.remove();
   const andOrDropdown = document.querySelector(`#and-or-${filterIndex}-${whenIndex}`);
   andOrDropdown.parentElement.remove();
@@ -163,39 +186,59 @@ function addFilterCustom(whenIndex) {
   const filterContainer = document.querySelector(`#filter-container-custom-${whenIndex}`);
 
   // Get the current filter count for this whenIndex
-  let filterIndex = filterCountsCustom[whenIndex] || 1;
+  let filterIndex = filterCountsCustom[whenIndex] || 2;
 
   // Create a new filter row
   const newFilterRow = document.createElement("div");
   newFilterRow.classList.add("filter-row");
   newFilterRow.innerHTML = `
-        <select class="filter-dropdown" id="filter-${filterIndex}-custom-${whenIndex}">
-            <option value="read-persist">Read from persist</option>
-            <option value="local-storage">Local Storage</option>
-            <option value="session-storage">Session Storage</option>
-            <option value="cookie">Cookie</option>
-            <option value="variable">Variable</option>
-            <option value="element">Element</option>
-        </select>
-        <div class="and-or-component">
-            <select class="and-or-dropdown" id="and-or-${filterIndex}-custom-${whenIndex}">
-                <option value="and">AND</option>
-                <option value="or">OR</option>
-            </select>
-            <button class="add-filter-btn" onclick="addFilterCustom(${whenIndex})">+</button>
-            <button class="remove-filter-btn" onclick="removeFilterCustom(${filterIndex}, ${whenIndex})">-</button>
-        </div>
+        <div class="margin-right">
+                		<label>Type</label>
+                    <select class="filter-dropdown" id="filter-${filterIndex}-custom-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+                </div>
+                <div class="margin-right">
+                <label>Ops</label>
+                <select class="filter-dropdown" id="filterOps-${filterIndex}-custom-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+                </div>
+                <div class="margin-right">
+                <label>Value</label>
+                <input type="text" id="FilterValue-${filterIndex}-custom-${whenIndex}" placeholder="Enter value">
+                </div>
     `;
-
+   const newAndOrRow = document.createElement("div");
+  newAndOrRow.classList.add("and-or-component");
+  newAndOrRow.innerHTML = `<select class="and-or-dropdown" id="and-or-${filterIndex}-custom-${whenIndex}">
+                        <option value="and">AND</option>
+                        <option value="or">OR</option>
+                    </select>
+                    <button class="add-filter-btn" onclick="addFilterCustom(${whenIndex})">+</button>
+                    <button class="remove-filter-btn" onclick="removeFilterCustom(${filterIndex}, ${whenIndex})">-</button>`;
   // Append the new filter row to the filter container
   filterContainer.appendChild(newFilterRow);
+  filterContainer.appendChild(newAndOrRow);
 
   // Increment the filter count for this whenIndex
   filterCountsCustom[whenIndex] = filterIndex + 1;
 }
 
 function removeFilterCustom(filterIndex, whenIndex) {
-  const filterRow = document.querySelector(`#filter-${filterIndex}-custom-${whenIndex}`);
+  const filterRow = document.querySelector(`#filter-${filterIndex}-custom-${whenIndex}`).parentElement.parentElement;
   filterRow.remove();
   const andOrDropdown = document.querySelector(`#and-or-${filterIndex}-custom-${whenIndex}`);
   andOrDropdown.parentElement.remove();
@@ -205,39 +248,59 @@ function addFilterWhatfix(whenIndex) {
   const filterContainer = document.querySelector(`#filter-container-whatfix-${whenIndex}`);
 
   // Get the current filter count for this whenIndex
-  let filterIndex = filterCountsWhatfix[whenIndex] || 1;
+  let filterIndex = filterCountsWhatfix[whenIndex] || 2;
 
   // Create a new filter row
   const newFilterRow = document.createElement("div");
   newFilterRow.classList.add("filter-row");
-  newFilterRow.innerHTML = `
-        <select class="filter-dropdown" id="filter-${filterIndex}-custom-${whenIndex}">
-            <option value="read-persist">Read from persist</option>
-            <option value="local-storage">Local Storage</option>
-            <option value="session-storage">Session Storage</option>
-            <option value="cookie">Cookie</option>
-            <option value="variable">Variable</option>
-            <option value="element">Element</option>
-        </select>
-        <div class="and-or-component">
-            <select class="and-or-dropdown" id="and-or-${filterIndex}-whatfix-${whenIndex}">
-                <option value="and">AND</option>
-                <option value="or">OR</option>
-            </select>
-            <button class="add-filter-btn" onclick="addFilterWhatfix(${whenIndex})">+</button>
-            <button class="remove-filter-btn" onclick="removeFilterWhatfix(${filterIndex}, ${whenIndex})">-</button>
-        </div>
-    `;
+  newFilterRow.innerHTML = `<div class="margin-right">
+                		<label>Type</label>
+                    <select class="filter-dropdown" id="filter-${filterIndex}-whatfix-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+                </div>
+                <div class="margin-right">
+                <label>Ops</label>
+                <select class="filter-dropdown" id="filterOps-${filterIndex}-whatfix-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+                </div>
+                <div class="margin-right">
+                <label>Value</label>
+                <input type="text" id="FilterValue-${filterIndex}-whatfix-${whenIndex}" placeholder="Enter value">
+                </div>`;
+    
+    const newAndOrRow = document.createElement("div");
+  newAndOrRow.classList.add("and-or-component");
+  newAndOrRow.innerHTML = `<select class="and-or-dropdown" id="and-or-${filterIndex}-whatfix-${whenIndex}">
+                        <option value="and">AND</option>
+                        <option value="or">OR</option>
+                    </select>
+                    <button class="add-filter-btn" onclick="addFilterWhatfix(${whenIndex})">+</button>
+                    <button class="remove-filter-btn" onclick="removeFilterWhatfix(${filterIndex}, ${whenIndex})">-</button>`;
 
   // Append the new filter row to the filter container
   filterContainer.appendChild(newFilterRow);
+  filterContainer.appendChild(newAndOrRow);
 
   // Increment the filter count for this whenIndex
   filterCountsWhatfix[whenIndex] = filterIndex + 1;
 }
 
 function removeFilterWhatfix(filterIndex, whenIndex) {
-  const filterRow = document.querySelector(`#filter-${filterIndex}-whatfix-${whenIndex}`);
+  const filterRow = document.querySelector(`#filter-${filterIndex}-whatfix-${whenIndex}`).parentElement.parentElement;
   filterRow.remove();
   const andOrDropdown = document.querySelector(`#and-or-${filterIndex}-whatfix-${whenIndex}`);
   andOrDropdown.parentElement.remove();
@@ -383,6 +446,8 @@ document.addEventListener("DOMContentLoaded", function() {
             <label>Filters:</label>
             <div id="filter-container-${whenIndex}">
                 <div class="filter-row">
+                		<div class="margin-right">
+                		<label>Type</label>
                     <select class="filter-dropdown" id="filter-1-${whenIndex}">
                     <option value="select-filter-options">Select Filter Options</option>
                     <option value="read-persist">Read from persist</option>
@@ -392,6 +457,23 @@ document.addEventListener("DOMContentLoaded", function() {
                     <option value="variable">Variable</option>
                     <option value="element">Element</option>
                 </select>
+                </div>
+                <div class="margin-right">
+                <label>Ops</label>
+                <select class="filter-dropdown" id="filterOps-1-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+                </div>
+                <div class="margin-right">
+                <label>Value</label>
+                <input type="text" id="FilterValue-1-${whenIndex}" placeholder="Enter value">
+                </div>
             </div>
                 <div class="and-or-component">
                     <select class="and-or-dropdown" id="and-or-1-${whenIndex}">
@@ -404,7 +486,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         </div>
       
-      
+  
       </div>
       <div class="component custom-event-options hide" id="custom-event-options-${whenIndex}">
         <!-- Properties -->
@@ -412,32 +494,51 @@ document.addEventListener("DOMContentLoaded", function() {
           <label>Event Name:</label>
           <input type="text" id="event-name-${whenIndex}" placeholder="Enter event name">
         </div>
+        <div class="custom-event-filter">
+            	<div class="event-data-filter">
+              <div class="flex-column">
+            	<label>Event Data1:</label>
+            	<select>
+              	
+              </select>
+              </div>
+              <div class="flex-column">
+              <label>Operation:</label>
+            	<select>
+              	
+              </select>
+              </div>
+              <div class="flex-column">
+              <label>Value:</label>
+            	<input type="text" id="FilterValue-1-${whenIndex}" placeholder="Enter value">
+              </div>
+              </div>
+              <div class="event-data-filter">
+              <div class="flex-column">
+            	<label>Event Data2:</label>
+            	<select>
+              	
+              </select>
+              </div>
+              <div class="flex-column">
+              <label>Operation:</label>
+            	<select>
+              	
+              </select>
+              </div>
+              <div class="flex-column">
+              <label>Value:</label>
+            	<input type="text" id="FilterValue-1-${whenIndex}" placeholder="Enter value">
+              </div>
+              </div>
+            </div>
         <!-- Filters -->
         <div class="filters">
             <label>Filters:</label>
-            <div class="custom-event-filter">
-            	<div>
-            	<label>Event Data1</label>
-            	<select>
-              	
-              </select>
-              </div>
-              <div>
-              <label>Event Data2</label>
-            	<select>
-              	
-              </select>
-              </div>
-            </div>
-            <div class="and-or-component-custom-filter">
-                    <select class="and-or-dropdown" >
-                        <option value="and">AND</option>
-                        <option value="or">OR</option>
-                    </select>
-                    
-                </div>
             <div id="filter-container-custom-${whenIndex}">
                 <div class="filter-row">
+                		<div class="margin-right">
+                		<label>Type</label>
                     <select class="filter-dropdown" id="filter-1-custom-${whenIndex}">
                     <option value="select-filter-options">Select Filter Options</option>
                     <option value="read-persist">Read from persist</option>
@@ -447,6 +548,23 @@ document.addEventListener("DOMContentLoaded", function() {
                     <option value="variable">Variable</option>
                     <option value="element">Element</option>
                 </select>
+                </div>
+                <div class="margin-right">
+                <label>Ops</label>
+                <select class="filter-dropdown" id="filterOps-1-custom-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+                </div>
+                <div class="margin-right">
+                <label>Value</label>
+                <input type="text" id="FilterValue-1-custom-${whenIndex}" placeholder="Enter value">
+                </div>
             </div>
                 <div class="and-or-component">
                     <select class="and-or-dropdown" id="and-or-1-custom-${whenIndex}">
@@ -454,7 +572,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <option value="or">OR</option>
                     </select>
                     <button class="add-filter-btn" onclick="addFilterCustom(${whenIndex})">+</button>
-                    <button class="remove-filter-btn" onclick="removeFilterCustom(1, ${whenIndex})">-</button>
+                    <button class="remove-filter-btn" >-</button>
                 </div>
             </div>
         </div>
@@ -473,39 +591,36 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
         <!-- Trigger Point -->
         <div class="trigger-point">
+        	<div class="callbacks-dropdown">
           <label>Trigger Point:</label>
           <select id="trigger-type-${whenIndex}">
             <option value="before-show">Before Show</option>
             <option value="on-close">On Close</option>
             <option value="on-open">On Open</option>
           </select>
-        </div>
-        <!-- Filters -->
-        <div class="filters">
-            <label>Filters:</label>
-            <div class="custom-event-filter">
+          </div>
+          <div class="custom-event-filter">
             	<div>
-            	<label>Event Data1</label>
+            	<label>FlowName:</label>
             	<select>
               	
               </select>
               </div>
               <div>
-              <label>Event Data2</label>
+              <label>StepId:</label>
             	<select>
               	
               </select>
               </div>
             </div>
-            <div class="and-or-component-custom-filter">
-                    <select class="and-or-dropdown" >
-                        <option value="and">AND</option>
-                        <option value="or">OR</option>
-                    </select>
-                    
-                </div>
+        </div>
+        <!-- Filters -->
+        <div class="filters">
+            <label>Filters:</label>
             <div id="filter-container-whatfix-${whenIndex}">
                 <div class="filter-row">
+                		<div class="margin-right">
+                		<label>Type</label>
                     <select class="filter-dropdown" id="filter-1-whatfix-${whenIndex}">
                     <option value="select-filter-options">Select Filter Options</option>
                     <option value="read-persist">Read from persist</option>
@@ -515,6 +630,23 @@ document.addEventListener("DOMContentLoaded", function() {
                     <option value="variable">Variable</option>
                     <option value="element">Element</option>
                 </select>
+                </div>
+                <div class="margin-right">
+                <label>Ops</label>
+                <select class="filter-dropdown" id="filterOps-1-whatfix-${whenIndex}">
+                    <option value="select-filter-options">Select Filter Options</option>
+                    <option value="read-persist">Read from persist</option>
+                    <option value="local-storage">Local Storage</option>
+                    <option value="session-storage">Session Storage</option>
+                    <option value="cookie">Cookie</option>
+                    <option value="variable">Variable</option>
+                    <option value="element">Element</option>
+                </select>
+                </div>
+                <div class="margin-right">
+                <label>Value</label>
+                <input type="text" id="FilterValue-1-whatfix-${whenIndex}" placeholder="Enter value">
+                </div>
             </div>
                 <div class="and-or-component">
                     <select class="and-or-dropdown" id="and-or-1-whatfix-${whenIndex}">
@@ -522,7 +654,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <option value="or">OR</option>
                     </select>
                     <button class="add-filter-btn" onclick="addFilterWhatfix(${whenIndex})">+</button>
-                    <button class="remove-filter-btn" onclick="removeFilterWhatfix(1, ${whenIndex})">-</button>
+                    <button class="remove-filter-btn" >-</button>
                 </div>
             </div>
         </div>
@@ -533,4 +665,118 @@ document.addEventListener("DOMContentLoaded", function() {
 
     whenIndex++;
   });
+  
+  const addRuleButton = document.querySelector(".add-rule-btn");
+  const container = document.querySelector(".container");
+  addRuleButton.addEventListener("click", function() {
+  	const newRuleBlock = document.createElement("div");
+    newRuleBlock.classList.add("rule-block-1");
+    newRuleBlock.innerHTML = `
+        <ul class="tabs">
+        <li class="active" data-tab="where-tab">WHERE</li>
+        <li data-tab="when-tab">WHEN</li>
+        <li data-tab="what-tab">WHAT</li>
+      </ul>
+        <div class="tab-content">
+        <div id="where-tab" class="tab-pane active">
+          <h3>WHERE</h3>
+          <div class="component where-components">
+            <label for="where-type">Type:</label>
+            <select id="where-type">
+              <option value="">Select Where</option>
+              <option value="url">url</option>
+              <option value="path">path</option>
+              <option value="query">query</option>
+              <option value="page_tag">page tag</option>
+              <option value="role_tag">role tag</option>
+              <option value="user_attr">user_attr</option>
+              <option value="ent_attr">ent_attr</option>
+            </select>
+
+            <label for="where-operation">Operation:</label>
+            <select id="where-operation">
+              <option value="=">=</option>
+              <option value="!=">!=</option>
+              <option value="startsWith">startsWith</option>
+              <option value="endsWith">endsWith</option>
+              <option value="contains">contains</option>
+              <option value="greaterThan">greater than</option>
+            </select>
+
+            <label for="where-value">Value:</label>
+            <input type="text" id="where-value" placeholder="Enter value">
+          </div>
+          <div class="component">
+            <select id="and-or">
+              <option value="and">AND</option>
+              <option value="or">OR</option>
+            </select>
+            <button id="add-where-btn">+</button>
+          </div>
+          <div id="where-container"></div>
+        </div>
+        <div id="when-tab" class="tab-pane">
+  <h3>WHEN</h3>
+  <button id="add-when-btn">Add WHEN</button>
+  <div id="when-container"></div>
+</div>
+        <div id="what-tab" class="tab-pane">
+          <h3>WHAT</h3>
+          <div class="sequences-container">
+            <div class="sequence">
+              <div class="component fetcher-component">
+                <label for="fetcher">Fetcher:</label>
+                <select class="fetcher">
+                  <option value="">Select Fetcher</option>
+                  <option value="element">Elements</option>
+                  <option value="network-call">Network Call</option>
+                  <option value="variable">Variable</option>
+                  <option value="local-storage">Local Storage</option>
+                  <option value="session-storage">Session Storage</option>
+                  <option value="function-invocation">Function Invocation to read value</option>
+                  <option value="read-from-persist">Read from persist</option>
+                </select>
+              </div>
+              <div class="processor-block">
+                <div class="component processors-component">
+                  <div class="processor-label-addition">
+                  <label for="processor">Processor:</label>
+                  <button class="add-processor-btn" onclick="addProcessorBlock(this)">+</button>
+                  </div>
+                  <div class="processor-dropdown">
+                    <select class="processors">
+                      <option value="">Select Processor</option>
+                      <option value="read-attribute">Read Attribute</option>
+                      <option value="string-operation">String Operation</option>
+                      <option value="json-operation">JSON Operation</option>
+                      <option value="number-operation">Number Operation</option>
+                    </select>
+                    <button class="remove-processor-btn" onclick="removeProcessorBlock(this)">-</button>
+                  </div>
+                </div>
+              </div>
+              <div class="component action-component">
+                <label for="action">Action:</label>
+                <select class="action">
+                  <option value="">Select Action</option>
+                  <option value="scroll-into-view">Scroll Into View</option>
+                  <option value="event-propagation">Event Propagation</option>
+                  <option value="_wfx_function-invocation">_wfx_function invocation</option>
+                  <option value="_wfx_setting_customizer">_wfx_setting_customizer</option>
+                  <option value="persist">Persist</option>
+                  <option value="fire-custom-event">Fire Custom Event</option>
+                  <option value="function-invocation">Function Invocation</option>
+                </select>
+              </div>
+              <button class="remove-sequence-btn" onclick="removeSequenceBlock(this)">Remove Sequence</button>
+            </div>
+            <button class="add-sequence-btn">Add Sequence +</button>
+          </div>
+
+        </div>
+      </div>
+        <button class="add-rule-btn">Add Rule+</button>
+     `;
+     container.appendChild(newRuleBlock);
+  })
 });
