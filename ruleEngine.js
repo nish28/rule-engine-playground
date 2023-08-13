@@ -168,7 +168,7 @@ function addFilter(whenIndex) {
 </select>
 <button class="add-filter-btn" onclick="addFilter(${whenIndex})">+</button>
 <button class="remove-filter-btn" onclick="removeFilter(${filterIndex}, ${whenIndex})">-</button>`;
-  
+
   filterContainer.appendChild(newAndOrRow);
 
   // Increment the filter count for this whenIndex
@@ -226,7 +226,7 @@ function addFilterCustom(whenIndex) {
                 <input type="text" id="FilterValue-${filterIndex}-custom-${whenIndex}" placeholder="Will change as per type and operations">
                 </div>
     `;
-   const newAndOrRow = document.createElement("div");
+  const newAndOrRow = document.createElement("div");
   newAndOrRow.classList.add("and-or-component");
   newAndOrRow.innerHTML = `<select class="and-or-dropdown" id="and-or-${filterIndex}-custom-${whenIndex}">
                         <option value="and">AND</option>
@@ -291,8 +291,8 @@ function addFilterWhatfix(whenIndex) {
                 <label>Value</label>
                 <input type="text" id="FilterValue-${filterIndex}-whatfix-${whenIndex}" placeholder="Will change as per type and operations">
                 </div>`;
-    
-    const newAndOrRow = document.createElement("div");
+
+  const newAndOrRow = document.createElement("div");
   newAndOrRow.classList.add("and-or-component");
   newAndOrRow.innerHTML = `<select class="and-or-dropdown" id="and-or-${filterIndex}-whatfix-${whenIndex}">
                         <option value="and">AND</option>
@@ -506,8 +506,23 @@ document.addEventListener("DOMContentLoaded", function() {
       <div class="component custom-event-options hide" id="custom-event-options-${whenIndex}">
         <!-- Properties -->
         <div class="properties">
+        	<div class="event-name">
           <label>Event Name:</label>
           <input type="text" id="event-name-${whenIndex}" placeholder="Enter event name">
+          </div>
+          <div class="delay">
+          <label>Delay:</label>
+          <div class="increase-decrease">
+            <input type="number" id="delay-${whenIndex}" placeholder="Enter delay in seconds">
+          </div>
+          </div>
+          <div class="retry">
+          <label>Retry:</label>
+          <div class="increase-decrease">
+            <input type="number" id="retry-times-${whenIndex}" placeholder="Times">
+            <input type="number" id="retry-frequency-${whenIndex}" placeholder="Frequency">
+          </div>
+          </div>
         </div>
         <!-- Filters -->
         <div class="filters">
@@ -640,11 +655,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     whenIndex++;
   });
-  
+
   const addRuleButton = document.querySelector(".add-rule-btn");
   const container = document.querySelector(".container");
   addRuleButton.addEventListener("click", function() {
-  	const newRuleBlock = document.createElement("div");
+    const newRuleBlock = document.createElement("div");
     newRuleBlock.classList.add("rule-block-1");
     newRuleBlock.innerHTML = `
         <ul class="tabs">
@@ -752,6 +767,6 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>
         <button class="add-rule-btn">Add Rule+</button>
      `;
-     container.appendChild(newRuleBlock);
+    container.appendChild(newRuleBlock);
   })
 });
