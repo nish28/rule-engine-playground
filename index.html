@@ -13,107 +13,107 @@
       <h2>Rule Engine</h2>
       <div class=rule-block>
         <ul class="tabs">
-        <li class="active" data-tab="where-tab">WHERE</li>
-        <li data-tab="when-tab">WHEN</li>
-        <li data-tab="what-tab">WHAT</li>
-      </ul>
+          <li class="active" data-tab="where-tab">WHERE</li>
+          <li data-tab="when-tab">WHEN</li>
+          <li data-tab="what-tab">WHAT</li>
+        </ul>
         <div class="tab-content">
-        <div id="where-tab" class="tab-pane active">
-          <h3>WHERE</h3>
-          <div class="component where-components">
-            <label for="where-type">Type:</label>
-            <select id="where-type">
-              <option value="">Select Where</option>
-              <option value="url">url</option>
-              <option value="path">path</option>
-              <option value="query">query</option>
-              <option value="page_tag">page tag</option>
-              <option value="hash">hash</option>
-            </select>
+          <div id="where-tab" class="tab-pane active">
+            <h3>WHERE</h3>
+            <div class="component where-components">
+              <label for="where-type">Type:</label>
+              <select id="where-type">
+                <option value="">Select Where</option>
+                <option value="url">url</option>
+                <option value="path">path</option>
+                <option value="query">query</option>
+                <option value="page_tag">page tag</option>
+                <option value="hash">hash</option>
+              </select>
 
-            <label for="where-operation">Operation:</label>
-            <select id="where-operation">
-              <option value="=">=</option>
-              <option value="!=">!=</option>
-              <option value="startsWith">startsWith</option>
-              <option value="endsWith">endsWith</option>
-              <option value="contains">contains</option>
-              <option value="not contains">not contains</option>
-            </select>
+              <label for="where-operation">Operation:</label>
+              <select id="where-operation">
+                <option value="=">=</option>
+                <option value="!=">!=</option>
+                <option value="startsWith">startsWith</option>
+                <option value="endsWith">endsWith</option>
+                <option value="contains">contains</option>
+                <option value="not contains">not contains</option>
+              </select>
 
-            <label for="where-value">Value:</label>
-            <input type="text" id="where-value" placeholder="Enter value">
+              <label for="where-value">Value:</label>
+              <input type="text" id="where-value" placeholder="Enter value">
+            </div>
+            <div class="component">
+              <select id="and-or">
+                <option value="and">AND</option>
+                <option value="or">OR</option>
+              </select>
+              <button id="add-where-btn">+</button>
+            </div>
+            <div id="where-container"></div>
           </div>
-          <div class="component">
-            <select id="and-or">
-              <option value="and">AND</option>
-              <option value="or">OR</option>
-            </select>
-            <button id="add-where-btn">+</button>
+          <div id="when-tab" class="tab-pane">
+            <h3>WHEN</h3>
+            <button id="add-when-btn">Add WHEN</button>
+            <div id="when-container"></div>
           </div>
-          <div id="where-container"></div>
-        </div>
-        <div id="when-tab" class="tab-pane">
-  <h3>WHEN</h3>
-  <button id="add-when-btn">Add WHEN</button>
-  <div id="when-container"></div>
-</div>
-        <div id="what-tab" class="tab-pane">
-          <h3>WHAT</h3>
-          <div class="sequences-container">
-            <div class="sequence">
-              <div class="component fetcher-component">
-                <label for="fetcher">Fetcher:</label>
-                <select class="fetcher">
-                  <option value="">Select Fetcher</option>
-                  <option value="element">Elements (Element definition will be asked)</option>
-                  <option value="network-call">Network Call (Details will be asked)</option>
-                  <option value="variable">Variable (variable name would be asked)</option>
-                  <option value="local-storage">Local Storage (key would be asked)</option>
-                  <option value="session-storage">Session Storage (key would be asked)</option>
-                  <option value="function-invocation">Function Invocation to read value</option>
-                  <option value="read-from-persist">Read from persist</option>
-                </select>
-              </div>
-              <div class="processor-block">
-                <div class="component processors-component">
-                  <div class="processor-label-addition">
-                  <label for="processor">Processor:</label>
-                  <button class="add-processor-btn" onclick="addProcessorBlock(this)">+</button>
-                  </div>
-                  <div class="processor-dropdown">
-                    <select class="processors">
-                      <option value="">Select Processor</option>
-                      <option value="read-attribute">Read Attribute (key would be asked)</option>
-                      <option value="string-operation">String Operation (all String ops would be given)</option>
-                      <option value="json-operation">JSON Operation (all json ops would be given)</option>
-                      <option value="number-operation">Number Operation (all number ops would be given)</option>
-                    </select>
-                    <button class="remove-processor-btn" onclick="removeProcessorBlock(this)">-</button>
+          <div id="what-tab" class="tab-pane">
+            <h3>WHAT</h3>
+            <div class="sequences-container">
+              <div class="sequence">
+                <div class="component fetcher-component">
+                  <label for="fetcher">Fetcher:</label>
+                  <select class="fetcher">
+                    <option value="">Select Fetcher</option>
+                    <option value="element">Elements (Element definition will be asked)</option>
+                    <option value="network-call">Network Call (Details will be asked)</option>
+                    <option value="variable">Variable (variable name would be asked)</option>
+                    <option value="local-storage">Local Storage (key would be asked)</option>
+                    <option value="session-storage">Session Storage (key would be asked)</option>
+                    <option value="function-invocation">Function Invocation to read value</option>
+                    <option value="read-from-persist">Read from persist</option>
+                  </select>
+                </div>
+                <div class="processor-block">
+                  <div class="component processors-component">
+                    <div class="processor-label-addition">
+                      <label for="processor">Processor:</label>
+                      <button class="add-processor-btn" onclick="addProcessorBlock(this)">+</button>
+                    </div>
+                    <div class="processor-dropdown">
+                      <select class="processors">
+                        <option value="">Select Processor</option>
+                        <option value="read-attribute">Read Attribute (key would be asked)</option>
+                        <option value="string-operation">String Operation (all String ops would be given)</option>
+                        <option value="json-operation">JSON Operation (all json ops would be given)</option>
+                        <option value="number-operation">Number Operation (all number ops would be given)</option>
+                      </select>
+                      <button class="remove-processor-btn" onclick="removeProcessorBlock(this)">-</button>
+                    </div>
                   </div>
                 </div>
+                <div class="component action-component">
+                  <label for="action">Action:</label>
+                  <select class="action">
+                    <option value="">Select Action</option>
+                    <option value="scroll-into-view">Scroll Into View</option>
+                    <option value="event-propagation">Event Propagation</option>
+                    <option value="_wfx_function-invocation">_wfx_function invocation</option>
+                    <option value="_wfx_setting_customizer">_wfx_setting_customizer</option>
+                    <option value="persist">Persist</option>
+                    <option value="fire-custom-event">Fire Custom Event</option>
+                    <option value="function-invocation">Function Invocation</option>
+                    <option value="reuse"> Reuse </option>
+                  </select>
+                </div>
+                <button class="remove-sequence-btn" onclick="removeSequenceBlock(this)">Remove Sequence</button>
               </div>
-              <div class="component action-component">
-                <label for="action">Action:</label>
-                <select class="action">
-                  <option value="">Select Action</option>
-                  <option value="scroll-into-view">Scroll Into View</option>
-                  <option value="event-propagation">Event Propagation</option>
-                  <option value="_wfx_function-invocation">_wfx_function invocation</option>
-                  <option value="_wfx_setting_customizer">_wfx_setting_customizer</option>
-                  <option value="persist">Persist</option>
-                  <option value="fire-custom-event">Fire Custom Event</option>
-                  <option value="function-invocation">Function Invocation</option>
-                  <option value="reuse"> Reuse </option>
-                </select>
-              </div>
-              <button class="remove-sequence-btn" onclick="removeSequenceBlock(this)">Remove Sequence</button>
+              <button class="add-sequence-btn">Add Sequence +</button>
             </div>
-            <button class="add-sequence-btn">Add Sequence +</button>
-          </div>
 
+          </div>
         </div>
-      </div>
         <button class="add-rule-btn">Add Rule+</button>
       </div>
     </div>
